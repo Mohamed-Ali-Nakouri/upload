@@ -8,11 +8,22 @@ let storage = multer.diskStorage({
     },
     filename: function (req, file, cb) {
        // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E3)
+
         cb(null,   file.originalname) // lenna esm el file ki yuploada
     }
 });
 
 let destination = multer({ storage: storage });
+app.use((req,res,next) => {
+    res.header('Access-Control-Allow-Origin','*');
+    res.header('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type, Accept');
+    if(req.method === 'OPTIONS')
+    {
+        res.header('Access-Control-Allow-Methods', 'POST,GET');
+        return res.status(200).json({});
+    }
+    next();
+});
 
 
 app.get('/', (req, res) => {
@@ -20,7 +31,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/upload', destination.single('image'), function (req, res, next) {
-    //console.log(req.file);
+    console.log(req.file.path);
     res.send("File upload sucessfully.");
 });
 
