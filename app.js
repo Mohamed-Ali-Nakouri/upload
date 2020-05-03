@@ -1,7 +1,8 @@
 const express = require('express');
 const app  = express();
 const multer  = require('multer');
-
+let cors = require('cors')
+app.use(cors());
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'uploads/')  // tbadel win bech t uploadi
