@@ -5,7 +5,7 @@ let cors = require('cors')
 app.use(cors());
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'uploads/')  // tbadel win bech t uploadi
+        cb(null, 'newFolder/')  // tbadel win bech t uploadi
     },
     filename: function (req, file, cb) {
        // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E3)
